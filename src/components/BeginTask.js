@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 
 import {Button, Header, Modal, Container, Icon} from 'semantic-ui-react';
 
-class WelcomeScreen extends Component {
+class BeginTask extends Component {
 
   state = {
     modalOpen: false
@@ -81,14 +81,7 @@ class WelcomeScreen extends Component {
 
           <div className="ui vertical segment">
             <Container text="text">
-              <div style={textStyles}>{intro}</div>
-              <div style={textStyles}>{instructions}</div>
-              <div style={textStyles}>{tasks}</div>
-              <ol>
-                <li style={textStyles}>{taskOne}</li>
-                <li style={textStyles}>{taskTwo}</li>
-                <li style={textStyles}>{taskThree}</li>
-              </ol>
+
             </Container>
           </div>
 
@@ -116,7 +109,7 @@ class WelcomeScreen extends Component {
                     onClick={this.handleClose}
                     inverted="inverted">
                     <Icon name='checkmark'/>
-                    <Link to="/begin">Begin Task</Link>
+                    <Link to ="/begin"></Link>Begin Task
                   </Button>
                 </Modal.Actions>
               </Modal>
@@ -130,4 +123,4 @@ class WelcomeScreen extends Component {
   }
 }
 
-export default WelcomeScreen;
+export default BeginTask;

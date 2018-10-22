@@ -14,6 +14,7 @@ import history from "../utils/history";
 
 // Components
 import WelcomeScreen from "../components/WelcomeScreen";
+import BeginTask from "../components/BeginTask"
 
 export class AppRouter extends Component {
   _element = React.createElement;
@@ -26,9 +27,14 @@ export class AppRouter extends Component {
 
     return (
       <Router history={history}>
-        <Route
-          path="/"
-          component={WelcomeScreen}/>
+        <div>
+          <Route
+            path="/"
+            component={WelcomeScreen}/>
+          <Route
+            path="/begin"
+            component={BeginTask}/>
+        </div>
       </Router>
     );
   }
