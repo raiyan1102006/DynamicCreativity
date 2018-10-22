@@ -1,27 +1,27 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {Component} from 'react';
 import 'semantic-ui-css/semantic.css';
+
+//Redux
+import {createStore, applyMiddleware} from 'redux';
+import {configureStore, sagaMiddleWare} from './store/ConfigureStore';
+import {Provider} from 'react-redux';
+
+// Sagas
+//import rootSaga from './middleware/Saga.js';
+
+// Containers
+import AppRouter from './containers/RouterContainer';
+
+const store = configureStore();
+
+//sagaMiddleWare.run(rootSaga);
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+      <Provider store={store}>
+        <AppRouter/>
+      </Provider>
     );
   }
 }
