@@ -13,8 +13,9 @@ import history from "../utils/history";
 //import * as AppActions from "../actions/Actions";
 
 // Components
+import Home from "../components/Home";
 import WelcomeScreen from "../components/WelcomeScreen";
-import BeginTask from "../components/BeginTask"
+import TaskScreen from "../components/TaskScreen";
 
 export class AppRouter extends Component {
   _element = React.createElement;
@@ -30,10 +31,13 @@ export class AppRouter extends Component {
         <div>
           <Route
             path="/"
+            component={Home}/>
+          <Route
+            path="/welcome"
             component={WelcomeScreen}/>
           <Route
-            path="/begin"
-            component={BeginTask}/>
+            path="/task"
+            component={TaskScreen}/>
         </div>
       </Router>
     );

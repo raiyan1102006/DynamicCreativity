@@ -5,7 +5,7 @@ import * as Actions from '../actions/Actions';
 const defaultState: Object = {
   nav: null,
   fetching: false,
-  introText: {}
+  showTask: false
 }
 
 // TODO replace all action creators with constants

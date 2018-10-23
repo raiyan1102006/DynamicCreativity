@@ -1,9 +1,16 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 
-import {Button, Header, Modal, Container, Icon} from 'semantic-ui-react';
+import {
+  Button,
+  Header,
+  Modal,
+  Container,
+  Icon,
+  Form
+} from 'semantic-ui-react';
 
-class BeginTask extends Component {
+class TaskScreen extends Component {
 
   state = {
     modalOpen: false
@@ -17,6 +24,7 @@ class BeginTask extends Component {
 
     const time = "2:00";
     const intro = "Thank you for particpating in the Creativity Project!";
+    const modalContent = "In this first section, you will be provided 4 minutes to list alternative uses for the prompt. Please note that vulgar answers can result in your expulsion from the study. You need to enter input to continue";
     const instructions = "This study consists of 5 Tasks";
     const tasks = "Each task will have three scetions";
     const taskOne = "You will be asked to come up with alternate uses of the given object";
@@ -50,44 +58,48 @@ class BeginTask extends Component {
       paddingRight: "2em"
     };
 
-    return (<div className="ui vertical segment" style={mainSegmentStyles}>
+    return (<div className="twelve wide column">
 
-      <div className="ui stackable equal height grid" style={mainSegmentStyles}>
+      <div className="ui vertical segment">
 
-        <div className="four wide teal column">
+        <Container textAlign='center' style={timeSegmentStyles}>
 
-          <div className="ui vertical segment">
-            <Container textAlign='center'>
-              <Header style={welcomeStyles}>
-                Welcome!
-              </Header>
-            </Container>
+          <Header style={timeStyles}></Header>
 
-          </div>
+        </Container>
 
-        </div>
+      </div>
 
-        <div className="twelve wide column">
+      <div className="ui vertical segment">
+        <Container text="text">
+          <Form>
+            <Form.Field>
+              <label>First Use</label>
+              <Form.input placeholder='Enter Input'/>
+            </Form.Field>
+            <Form.Field>
+              <label>Second Use</label>
+              <Form.input placeholder='Enter Input'/>
+            </Form.Field>
+            <Form.Field>
+              <label>Third Use</label>
+              <Form.input placeholder='Enter Input'/>
+            </Form.Field>
+            <Form.Field>
+              <label>Fourth Use</label>
+              <Form.input placeholder='Enter Input'/>
+            </Form.Field>
+            <Form.Field>
+              <label>Fifth Use</label>
+              <Form.input placeholder='Enter Input'/>
+            </Form.Field>
+            <Form.Field>
+              <label>Sixth Use Name</label>
+              <Form.input placeholder='Enter Input'/>
+            </Form.Field>
 
-          <div className="ui vertical segment">
-
-            <Container textAlign='center' style={timeSegmentStyles}>
-
-              <Header style={timeStyles}></Header>
-
-            </Container>
-
-          </div>
-
-          <div className="ui vertical segment">
-            <Container text="text">
-
-            </Container>
-          </div>
-
-          <div className="ui vertical segment">
             <Container textAlign='right' style={modalStyles}>
-              <Modal trigger={<Button color='teal' onClick = {
+              <Modal trigger={<Button color = 'teal' onClick = {
                   this.handleOpen
                 } > Begin < /Button>} open={this.state.modalOpen} onClose={this.handleClose} basic="basic" size='small'>
 
@@ -95,7 +107,7 @@ class BeginTask extends Component {
 
                 <Modal.Content>
                   <div>
-                    In this first section, you will be provided 4 minutes to list alternative uses for the prompt. Please note that vulgar answers can result in your expulsion from the study. You need to enter input to continue
+                    {modalContent}
                   </div>
 
                   <div>
@@ -104,23 +116,20 @@ class BeginTask extends Component {
                 </Modal.Content>
 
                 <Modal.Actions>
-                  <Button
-                    color='green'
-                    onClick={this.handleClose}
-                    inverted="inverted">
+                  <Button color='green' onClick={this.handleClose} inverted="inverted">
                     <Icon name='checkmark'/>
-                    <Link to ="/begin"></Link>Begin Task
+                    Next
                   </Button>
                 </Modal.Actions>
               </Modal>
             </Container>
-          </div>
 
-        </div>
-
+          </Form>
+        </Container>
       </div>
+
     </div>);
   }
 }
 
-export default BeginTask;
+export default TaskScreen;
