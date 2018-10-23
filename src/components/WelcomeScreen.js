@@ -76,19 +76,7 @@ class WelcomeScreen extends Component {
 
 
     return (
-
-      <div className="twelve wide column">
-
-        <div className="ui vertical segment">
-
-          <Container textAlign='center' style={timeSegmentStyles}>
-
-            <Header style={timeStyles}></Header>
-
-          </Container>
-
-        </div>
-
+      <div>
         <div className="ui vertical segment">
           <Container text="text">
             <div style={textStyles}>{intro}</div>

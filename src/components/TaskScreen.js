@@ -85,65 +85,17 @@ class TaskScreen extends Component {
 
   render() {
 
-    const time = "2:00";
-    const intro = "Thank you for particpating in the Creativity Project!";
     const modalContent = "In this first section, you will be provided 4 minutes to list alternative uses for the prompt. Please note that vulgar answers can result in your expulsion from the study. You need to enter input to continue";
-    const instructions = "This study consists of 5 Tasks";
-    const tasks = "Each task will have three scetions";
-    const taskOne = "You will be asked to come up with alternate uses of the given object";
-    const taskTwo = "After you submit your list, we will show what others in your network submitted and you will get to edit your answers";
-    const taskThree = "Then you will be able to view all members of your network and change who you follow, before the next task starts";
-
-    const err =
-      <Message
-        error
-        header='Action Forbidden'
-        content='Please fill in the boxes!'
-      />;
 
     let isErr = this.state.showErr;
-    console.log(isErr);
-
-    let mainSegmentStyles = {
-      height: "100%",
-      paddingBottom: "0em"
-    };
-
-    let timeSegmentStyles = {
-      height: "10em"
-    };
-
-    let timeStyles = {
-      paddingTop: "2em"
-    };
-
-    let welcomeStyles = {
-      color: "#fff",
-      paddingTop: "2em"
-    }
-
-    let textStyles = {
-      fontSize: "1.4em",
-      lineHeight: "2em"
-    };
 
     let modalStyles = {
       paddingRight: "2em"
     };
 
     if (isErr) {
-      return (<div className="twelve wide column">
-
-        <div className="ui vertical segment">
-
-          <Container textAlign='center' style={timeSegmentStyles}>
-
-            <Header style={timeStyles}> </Header>
-
-          </Container>
-
-        </div>
-
+      return (
+      <div>
         <div className="ui vertical segment">
           <Container text="text">
             <Form error>
@@ -205,21 +157,10 @@ class TaskScreen extends Component {
             </Form>
           </Container>
         </div>
-
       </div>);
     }else{
-      return (<div className="twelve wide column">
-
-        <div className="ui vertical segment">
-
-          <Container textAlign='center' style={timeSegmentStyles}>
-
-            <Header style={timeStyles}></Header>
-
-          </Container>
-
-        </div>
-
+      return (
+      <div>
         <div className="ui vertical segment">
           <Container text="text">
             <Form>
@@ -277,7 +218,6 @@ class TaskScreen extends Component {
             </Form>
           </Container>
         </div>
-
       </div>);
     }
   }
