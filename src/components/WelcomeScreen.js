@@ -22,7 +22,6 @@ class WelcomeScreen extends Component {
 
   onHandleShowTask = () => {
     this.onHandleClose();
-    console.log(this.props);
     this.props.onHandleShowTask();
   }
 

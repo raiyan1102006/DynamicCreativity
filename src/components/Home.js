@@ -22,8 +22,6 @@ class Home extends Component {
   }
 
   componentWillUpdate(nextProps, nextState) {
-    console.log(nextState);
-    console.log(nextProps);
     return true;
   }
 
@@ -34,8 +32,6 @@ class Home extends Component {
   render() {
 
     let isTaskActive = this.state.show;
-
-    console.log(isTaskActive);
 
     let mainSegmentStyles = {
       height: "100%",

@@ -7,18 +7,81 @@ import {
   Modal,
   Container,
   Icon,
-  Form
+  Form,
+  Message
 } from 'semantic-ui-react';
 
 class TaskScreen extends Component {
 
   state = {
-    modalOpen: false
+    modalOpen: false,
+    showErr: false,
+    inputOne:' ',
+    inputTwo:' ',
+    inputThree:' ',
+    inputFour:' ',
+    inputFive:' ',
+    inputSix:' '
   }
 
-  handleOpen = () => this.setState({modalOpen: true})
+  constructor(props: Object) {
+    super(props);
+    // Bind all methods to 'this' context here
+    (this: any).onHandleOpen = this.onHandleOpen.bind(this);
+    (this: any).onHandleClose = this.onHandleClose.bind(this);
+    (this: any).onHandleOneChange = this.onHandleOneChange.bind(this);
+    (this: any).onHandleTwoChange = this.onHandleTwoChange.bind(this);
+    (this: any).onHandleThreeChange = this.onHandleThreeChange.bind(this);
+    (this: any).onHandleFourChange = this.onHandleFourChange.bind(this);
+    (this: any).onHandleFiveChange = this.onHandleFiveChange.bind(this);
+    (this: any).onHandleSixChange = this.onHandleSixChange.bind(this);
 
-  handleClose = () => this.setState({modalOpen: false})
+  }
+
+  componentWillUpdate(nextProps, nextState) {
+    return true;
+  }
+
+  onHandleOpen = () => {
+    if (this.state.inputOne===' '||
+      this.state.inputTwo===' '||
+      this.state.inputThree===' '||
+      this.state.inputFour==='' ||
+      this.state.inputFive===' '||
+      this.state.inputSix===' ') {
+        this.setState({showErr: true});
+    }else{
+        this.setState({modalOpen: true});
+    }
+  }
+
+  onHandleClose = () => {
+    this.setState({modalOpen: false})
+  }
+
+  onHandleOneChange = (event) => {
+    this.setState({inputOne: event.target.value});
+  }
+
+  onHandleTwoChange = (event) => {
+    this.setState({inputTwo: event.target.value});
+  }
+
+  onHandleThreeChange = (event) => {
+    this.setState({inputThree: event.target.value});
+  }
+
+  onHandleFourChange = (event) => {
+    this.setState({inputFour: event.target.value});
+  }
+
+  onHandleFiveChange = (event) => {
+    this.setState({inputFive: event.target.value});
+  }
+
+  onHandleSixChange = (event) => {
+    this.setState({inputSix: event.target.value});
+  }
 
   render() {
 
@@ -30,6 +93,16 @@ class TaskScreen extends Component {
     const taskOne = "You will be asked to come up with alternate uses of the given object";
     const taskTwo = "After you submit your list, we will show what others in your network submitted and you will get to edit your answers";
     const taskThree = "Then you will be able to view all members of your network and change who you follow, before the next task starts";
+
+    const err =
+      <Message
+        error
+        header='Action Forbidden'
+        content='Please fill in the boxes!'
+      />;
+
+    let isErr = this.state.showErr;
+    console.log(isErr);
 
     let mainSegmentStyles = {
       height: "100%",
@@ -58,77 +131,155 @@ class TaskScreen extends Component {
       paddingRight: "2em"
     };
 
-    return (<div className="twelve wide column">
+    if (isErr) {
+      return (<div className="twelve wide column">
 
-      <div className="ui vertical segment">
+        <div className="ui vertical segment">
 
-        <Container textAlign='center' style={timeSegmentStyles}>
+          <Container textAlign='center' style={timeSegmentStyles}>
 
-          <Header style={timeStyles}></Header>
+            <Header style={timeStyles}> </Header>
 
-        </Container>
+          </Container>
 
-      </div>
+        </div>
 
-      <div className="ui vertical segment">
-        <Container text="text">
-          <Form>
-            <Form.Field>
-              <label>First Use</label>
-              <Form.input placeholder='Enter Input'/>
-            </Form.Field>
-            <Form.Field>
-              <label>Second Use</label>
-              <Form.input placeholder='Enter Input'/>
-            </Form.Field>
-            <Form.Field>
-              <label>Third Use</label>
-              <Form.input placeholder='Enter Input'/>
-            </Form.Field>
-            <Form.Field>
-              <label>Fourth Use</label>
-              <Form.input placeholder='Enter Input'/>
-            </Form.Field>
-            <Form.Field>
-              <label>Fifth Use</label>
-              <Form.input placeholder='Enter Input'/>
-            </Form.Field>
-            <Form.Field>
-              <label>Sixth Use Name</label>
-              <Form.input placeholder='Enter Input'/>
-            </Form.Field>
+        <div className="ui vertical segment">
+          <Container text="text">
+            <Form error>
+              <Form.Field>
+                <label>First Use</label>
+                <Form.Input onChange={this.onHandleOneChange} placeholder='Enter Input'/>
+              </Form.Field>
+              <Form.Field>
+                <label>Second Use</label>
+                <Form.Input onChange={this.onHandleTwoChange} placeholder='Enter Input'/>
+              </Form.Field>
+              <Form.Field>
+                <label>Third Use</label>
+                <Form.Input onChange={this.onHandleThreeChange} placeholder='Enter Input'/>
+              </Form.Field>
+              <Form.Field>
+                <label>Fourth Use</label>
+                <Form.Input onChange={this.onHandleFourChange} placeholder='Enter Input'/>
+              </Form.Field>
+              <Form.Field>
+                <label>Fifth Use</label>
+                <Form.Input onChange={this.onHandleFiveChange} placeholder='Enter Input'/>
+              </Form.Field>
+              <Form.Field>
+                <label>Sixth Use </label>
+                <Form.Input onChange={this.onHandleSixChange} placeholder='Enter Input'/>
+              </Form.Field>
+              <Message
+                error
+                header='Action Forbidden'
+                content='Please fill in the boxes!'
+              />
+              <Container textAlign='right' style={modalStyles}>
+                <Modal trigger={<Button color = 'teal' onClick = {
+                    this.onHandleOpen
+                  } > Begin </Button>} open={this.state.modalOpen} onClose={this.onHandleClose} basic="basic" size='small'>
 
-            <Container textAlign='right' style={modalStyles}>
-              <Modal trigger={<Button color = 'teal' onClick = {
-                  this.handleOpen
-                } > Begin < /Button>} open={this.state.modalOpen} onClose={this.handleClose} basic="basic" size='small'>
+                  <Header icon='browser' content='Ready?'/>
 
-                <Header icon='browser' content='Ready?'/>
+                  <Modal.Content>
+                    <div>
+                      {modalContent}
+                    </div>
 
-                <Modal.Content>
-                  <div>
-                    {modalContent}
-                  </div>
+                    <div>
+                      This is a timed section
+                    </div>
+                  </Modal.Content>
 
-                  <div>
-                    This is a timed section
-                  </div>
-                </Modal.Content>
+                  <Modal.Actions>
+                    <Button color='green' onClick={this.onHandleClose} inverted="inverted">
+                      <Icon name='checkmark'/>
+                      Next
+                    </Button>
+                  </Modal.Actions>
+                </Modal>
+              </Container>
 
-                <Modal.Actions>
-                  <Button color='green' onClick={this.handleClose} inverted="inverted">
-                    <Icon name='checkmark'/>
-                    Next
-                  </Button>
-                </Modal.Actions>
-              </Modal>
-            </Container>
+            </Form>
+          </Container>
+        </div>
 
-          </Form>
-        </Container>
-      </div>
+      </div>);
+    }else{
+      return (<div className="twelve wide column">
 
-    </div>);
+        <div className="ui vertical segment">
+
+          <Container textAlign='center' style={timeSegmentStyles}>
+
+            <Header style={timeStyles}></Header>
+
+          </Container>
+
+        </div>
+
+        <div className="ui vertical segment">
+          <Container text="text">
+            <Form>
+              <Form.Field>
+                <label>First Use</label>
+                <Form.Input onChange={this.onHandleOneChange} placeholder='Enter Input'/>
+              </Form.Field>
+              <Form.Field>
+                <label>Second Use</label>
+                <Form.Input onChange={this.onHandleTwoChange} placeholder='Enter Input'/>
+              </Form.Field>
+              <Form.Field>
+                <label>Third Use</label>
+                <Form.Input onChange={this.onHandleThreeChange} placeholder='Enter Input'/>
+              </Form.Field>
+              <Form.Field>
+                <label>Fourth Use</label>
+                <Form.Input onChange={this.onHandleFourChange} placeholder='Enter Input'/>
+              </Form.Field>
+              <Form.Field>
+                <label>Fifth Use</label>
+                <Form.Input onChange={this.onHandleFiveChange} placeholder='Enter Input'/>
+              </Form.Field>
+              <Form.Field>
+                <label>Sixth Use </label>
+                <Form.Input onChange={this.onHandleSixChange} placeholder='Enter Input'/>
+              </Form.Field>
+
+              <Container textAlign='right' style={modalStyles}>
+                <Modal trigger={<Button color = 'teal' onClick = {
+                    this.onHandleOpen
+                  } > Begin </Button>} open={this.state.modalOpen} onClose={this.onHandleClose} basic="basic" size='small'>
+
+                  <Header icon='browser' content='Ready?'/>
+
+                  <Modal.Content>
+                    <div>
+                      {modalContent}
+                    </div>
+
+                    <div>
+                      This is a timed section
+                    </div>
+                  </Modal.Content>
+
+                  <Modal.Actions>
+                    <Button color='green' onClick={this.onHandleClose} inverted="inverted">
+                      <Icon name='checkmark'/>
+                      Next
+                    </Button>
+                  </Modal.Actions>
+                </Modal>
+              </Container>
+
+            </Form>
+          </Container>
+        </div>
+
+      </div>);
+    }
   }
 }
 
