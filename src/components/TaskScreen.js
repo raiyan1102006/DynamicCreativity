@@ -97,7 +97,7 @@ class TaskScreen extends Component {
       return (
       <div>
         <div className="ui vertical segment">
-          <Container text="text">
+          <Container text>
             <Form error>
               <Form.Field>
                 <label>First Use</label>
@@ -131,7 +131,7 @@ class TaskScreen extends Component {
               <Container textAlign='right' style={modalStyles}>
                 <Modal trigger={<Button color = 'teal' onClick = {
                     this.onHandleOpen
-                  } > Begin </Button>} open={this.state.modalOpen} onClose={this.onHandleClose} basic="basic" size='small'>
+                  } > Begin </Button>} open={this.state.modalOpen} onClose={this.onHandleClose} basic size='small'>
 
                   <Header icon='browser' content='Ready?'/>
 
@@ -162,7 +162,7 @@ class TaskScreen extends Component {
       return (
       <div>
         <div className="ui vertical segment">
-          <Container text="text">
+          <Container text>
             <Form>
               <Form.Field>
                 <label>First Use</label>
@@ -192,7 +192,7 @@ class TaskScreen extends Component {
               <Container textAlign='right' style={modalStyles}>
                 <Modal trigger={<Button color = 'teal' onClick = {
                     this.onHandleOpen
-                  } > Begin </Button>} open={this.state.modalOpen} onClose={this.onHandleClose} basic="basic" size='small'>
+                  } > Begin </Button>} open={this.state.modalOpen} onClose={this.onHandleClose} basic size='small'>
 
                   <Header icon='browser' content='Ready?'/>
 
@@ -207,7 +207,7 @@ class TaskScreen extends Component {
                   </Modal.Content>
 
                   <Modal.Actions>
-                    <Button color='green' onClick={this.onHandleClose} inverted="inverted">
+                    <Button color='green' onClick={this.onHandleClose} inverted>
                       <Icon name='checkmark'/>
                       Next
                     </Button>

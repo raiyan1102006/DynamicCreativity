@@ -22,7 +22,8 @@ class WelcomeScreen extends Component {
 
   onHandleShowTask = () => {
     this.onHandleClose();
-    this.props.onHandleShowTask();
+    const{dispatch} = this.props;
+    dispatch({type: 'FETCH_SHOW_TASK', payload: false});
   }
 
   onHandleOpen = () => {
@@ -78,7 +79,7 @@ class WelcomeScreen extends Component {
     return (
       <div>
         <div className="ui vertical segment">
-          <Container text="text">
+          <Container text>
             <div style={textStyles}>{intro}</div>
             <div style={textStyles}>{instructions}</div>
             <div style={textStyles}>{tasks}</div>
@@ -100,7 +101,7 @@ class WelcomeScreen extends Component {
                 </Button>}
               open={this.state.modalOpen}
               onClose={this.onHandleClose}
-              basic="basic"
+              basic
               size='small'>
 
               <Header icon='browser' content='Ready?'/>
@@ -119,7 +120,7 @@ class WelcomeScreen extends Component {
                 <Button
                   color='green'
                   onClick={this.onHandleShowTask}
-                  inverted="inverted">
+                  inverted>
                   <Icon name='checkmark'/>
                   Next
                 </Button>

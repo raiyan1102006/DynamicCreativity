@@ -9,8 +9,6 @@ import TaskScreen from './TaskScreen';
 
 class TimerScreen extends Component {
 
-  state = {timerStart: false};
-
   constructor(props: Object) {
     super(props);
     // Bind all methods to 'this' context here
@@ -31,7 +29,7 @@ class TimerScreen extends Component {
 
   render() {
 
-    let isTimerActive = this.state.timerStart;
+    let isTimerActive = this.props.showTask;
 
     let mainSegmentStyles = {
       height: "100%",
@@ -75,7 +73,7 @@ class TimerScreen extends Component {
       return (
         <div className="ui vertical segment">
           <Container textAlign='center' style={timeSegmentStyles}>
-            <Header style={timeStyles}></Header>
+            <Header style={timeStyles}>3:00</Header>
           </Container>
         </div>
       );

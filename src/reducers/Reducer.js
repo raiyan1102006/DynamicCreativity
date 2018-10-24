@@ -3,7 +3,6 @@
 import * as Actions from '../actions/Actions';
 
 const defaultState: Object = {
-  nav: null,
   fetching: false,
   showTask: false
 }
@@ -12,6 +11,13 @@ const defaultState: Object = {
 
 export default function creativityReducer(state: Object = defaultState, action: Object): Object {
   switch (action.type) {
+
+    case 'FETCH_TASK_DONE':
+      console.log(action.result);
+      return {
+        ...state,
+        showTask: action.result
+      }
 
     default:
       return state;

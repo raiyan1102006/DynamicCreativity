@@ -9,12 +9,11 @@ import TimerScreen from '../components/TimerScreen';
 
 class RightHandPanel extends Component {
 
-  state = { showTask: false, show: false }
+  //state = { showTask: false, show: false }
 
   constructor(props: Object) {
     super(props);
     // Bind all methods to 'this' context here
-    (this: any).onHandleShowTask = this.onHandleShowTask.bind(this);
   }
 
   componentWillMount() {
@@ -22,16 +21,15 @@ class RightHandPanel extends Component {
   }
 
   componentWillUpdate(nextProps, nextState) {
+    console.log(nextProps);
+    console.log(nextState);
     return true;
-  }
-
-  onHandleShowTask(){
-    this.setState({show: (!this.state.showTask)});
   }
 
   render() {
 
-    let isTaskActive = this.state.show;
+    let isTaskActive = this.props.showTask;
+    console.log(this.props);
 
     let mainSegmentStyles = {
       height: "100%",
@@ -51,7 +49,7 @@ class RightHandPanel extends Component {
       return (
       <div>
         <TimerScreen/>
-        <WelcomeScreen onHandleShowTask={this.onHandleShowTask}/>
+        <WelcomeScreen />
       </div>
       );
 

@@ -50,7 +50,7 @@ class HomePage extends Component {
       return (
         <div className="ui vertical segment" style={mainSegmentStyles}>
 
-          <div className="ui stackable equal height grid" style={mainSegmentStyles}>
+          <div className="ui stackable grid" style={mainSegmentStyles}>
 
             <div className="four wide teal column">
               <LeftHandPanel/>
