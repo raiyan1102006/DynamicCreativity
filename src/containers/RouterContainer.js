@@ -30,6 +30,12 @@ export class AppRouter extends Component {
           <Route
             path="/"
             component={HomePage}/>
+          <Route
+            path="/task"
+            component={HomePage}/>
+          <Route
+            path="/network"
+            component={HomePage}/>
         </div>
       </Router>
     );

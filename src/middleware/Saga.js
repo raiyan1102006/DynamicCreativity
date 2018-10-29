@@ -11,13 +11,42 @@ export function* showTask(action) {
   }
 }
 
-// Our watcher Saga: spawn a new incrementAsync task on each INCREMENT_ASYNC
+export function* showNetwork(action) {
+  try {
+    const isNetworkActive = !action.payload;
+    console.log(isNetworkActive);
+    yield put({ type: 'FETCH_NETWORK_DONE', result: isNetworkActive });
+  } catch (e) {
+    yield put({ type: 'FETCH_NETWORK_FAILED', message: e.message });
+  }
+}
+
+export function* showUsers(action) {
+  try {
+    const isUsersActive = !action.payload;
+    console.log(isUsersActive);
+    yield put({ type: 'FETCH_SHOW_USERS_DONE', result: isUsersActive });
+  } catch (e) {
+    yield put({ type: 'FETCH_SHOW_USERS_FAILED', message: e.message });
+  }
+}
+
 export function* watchForShowTask() {
   yield takeEvery('FETCH_SHOW_TASK', showTask);
 }
 
+export function* watchForNetwork() {
+  yield takeEvery('FETCH_NETWORK', showNetwork);
+}
+
+export function* watchForShowUsers() {
+  yield takeEvery('FETCH_SHOW_USERS', showUsers);
+}
+
 export default function* rootSaga(): Generator<any, any, any> {
   yield [
-    fork(watchForShowTask)
+    fork(watchForShowTask),
+    fork(watchForNetwork),
+    fork(watchForShowUsers)
   ];
 }

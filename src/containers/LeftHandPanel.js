@@ -3,11 +3,9 @@ import { connect } from 'react-redux';
 
 import {Button, Header, Modal, Container, Icon} from 'semantic-ui-react';
 
-import TaskList from '../components/TaskList';
+import TaskListScreen from '../components/TaskListScreen';
 
 class LeftHandPanel extends Component {
-
-  state = { showTask: false, show: false }
 
   constructor(props: Object) {
     super(props);
@@ -29,7 +27,9 @@ class LeftHandPanel extends Component {
 
   render() {
 
-    let isTaskActive = this.state.show;
+    let isTaskActive = this.props.showTask;
+    let isNetworkActive = this.props.showNetwork;
+    let isUserActive = this.props.showUsers;
 
     let mainSegmentStyles = {
       height: "100%",
@@ -45,7 +45,7 @@ class LeftHandPanel extends Component {
       marginTop: "0rem"
     };
 
-    if (!isTaskActive) {
+    if (!isTaskActive && !isNetworkActive && !isUserActive) {
       return (
           <div className="ui vertical segment">
             <Container textAlign='center'>
@@ -64,7 +64,7 @@ class LeftHandPanel extends Component {
             <Header style={welcomeStyles}>
               Welcome!
             </Header>
-            <TaskList/>
+            <TaskListScreen/>
           </Container>
         </div>
       );
@@ -74,7 +74,9 @@ class LeftHandPanel extends Component {
 
 function mapStateToProps(state): Object {
   return {
-    showTask: state.showTask
+    showTask: state.showTask,
+    showNetwork: state.showNetwork,
+    showUsers: state.showUsers
   }
 }
 

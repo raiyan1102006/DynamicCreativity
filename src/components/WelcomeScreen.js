@@ -8,6 +8,8 @@ class WelcomeScreen extends Component {
 
   state = { modalOpen: false }
 
+  show = dimmer => () => this.setState({dimmer});
+
   constructor(props: Object) {
     super(props);
     // Bind all methods to 'this' context here
@@ -27,6 +29,7 @@ class WelcomeScreen extends Component {
   }
 
   onHandleOpen = () => {
+    this.show('blurring');
     this.setState({modalOpen: true})
   }
 
@@ -36,6 +39,11 @@ class WelcomeScreen extends Component {
 
   render() {
 
+    //Props and State
+    const {onShowTask} = this.props;
+    const {dimmer} = this.state;
+
+    //Constants -- need to export to another file
     const time = "2:00";
     const intro = "Thank you for particpating in the Creativity Project!";
     const modalContent = "In this first section, you will be provided 4 minutes to list alternative uses for the prompt. Please note that vulgar answers can result in your expulsion from the study. You need to enter input to continue";
@@ -44,12 +52,16 @@ class WelcomeScreen extends Component {
     const taskOne = "You will be asked to come up with alternate uses of the given object";
     const taskTwo = "After you submit your list, we will show what others in your network submitted and you will get to edit your answers";
     const taskThree = "Then you will be able to view all members of your network and change who you follow, before the next task starts";
+    const modalTimeContent = "This is a time section";
 
-    const {onShowTask} = this.props;
-
+    //Styles -- also export to another file
     let mainSegmentStyles = {
       height: "100%",
       paddingBottom: "0em"
+    };
+
+    let segmentStyles = {
+      paddingBottom: "10em"
     };
 
     let timeSegmentStyles = {
@@ -78,7 +90,7 @@ class WelcomeScreen extends Component {
 
     return (
       <div>
-        <div className="ui vertical segment">
+        <div className="ui vertical segment" style={segmentStyles}>
           <Container text>
             <div style={textStyles}>{intro}</div>
             <div style={textStyles}>{instructions}</div>
@@ -89,15 +101,14 @@ class WelcomeScreen extends Component {
               <li style={textStyles}>{taskThree}</li>
             </ol>
           </Container>
-        </div>
 
-        <div className="ui vertical segment">
           <Container textAlign='right' style={modalStyles}>
             <Modal
+              dimmer={dimmer}
               trigger={
                 <Button
                   color='teal'
-                  onClick = {this.onHandleOpen}> Begin
+                  onClick = {this.onHandleOpen}> Begin Study
                 </Button>}
               open={this.state.modalOpen}
               onClose={this.onHandleClose}
@@ -111,9 +122,10 @@ class WelcomeScreen extends Component {
                   {modalContent}
                 </div>
 
-                <div>
-                  This is a timed section
-                </div>
+                <Header
+                  size='small'
+                  color='red'
+                  content={modalTimeContent}/>
               </Modal.Content>
 
               <Modal.Actions>
@@ -122,7 +134,7 @@ class WelcomeScreen extends Component {
                   onClick={this.onHandleShowTask}
                   inverted>
                   <Icon name='checkmark'/>
-                  Next
+                  Begin
                 </Button>
               </Modal.Actions>
             </Modal>
@@ -135,7 +147,8 @@ class WelcomeScreen extends Component {
 
 function mapStateToProps(state): Object {
   return {
-    showTask: state.showTask
+    showTask: state.showTask,
+    showNetwork: state.showNetwork
   }
 }
 

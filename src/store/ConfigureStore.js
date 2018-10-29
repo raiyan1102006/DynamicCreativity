@@ -1,7 +1,7 @@
 /* @flow */
 
 // Redux
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import creativityReducer from '../reducers/Reducer';
 import rootSaga from '../middleware/Saga';
 
@@ -11,10 +11,10 @@ import createSagaMiddleware from 'redux-saga';
 export const sagaMiddleWare = createSagaMiddleware();
 
 export function configureStore() {
-
+  const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
   return createStore(
     creativityReducer,
-    window.STATE_FROM_SERVER,
-    applyMiddleware(sagaMiddleWare)
-  );
+    composeEnhancers(
+      applyMiddleware(sagaMiddleWare)
+  ));
 }

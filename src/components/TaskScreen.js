@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import {
   Button,
@@ -22,11 +23,14 @@ class TaskScreen extends Component {
     inputFour:' ',
     inputFive:' ',
     inputSix:' '
-  }
+  };
+
+  show = dimmer => () => this.setState({dimmer});
 
   constructor(props: Object) {
     super(props);
     // Bind all methods to 'this' context here
+    (this: any).onHandleNetworkTask = this.onHandleNetworkTask.bind(this);
     (this: any).onHandleOpen = this.onHandleOpen.bind(this);
     (this: any).onHandleClose = this.onHandleClose.bind(this);
     (this: any).onHandleOneChange = this.onHandleOneChange.bind(this);
@@ -42,6 +46,16 @@ class TaskScreen extends Component {
     return true;
   }
 
+  onHandleNetworkTask = () => {
+    this.onHandleClose();
+    const{dispatch} = this.props;
+    if (this.props.showTask) {
+      dispatch({type: 'FETCH_NETWORK', payload: false});
+    }else if(this.props.showNetwork){
+      dispatch({type: 'FETCH_SHOW_USERS', payload: false});
+    }
+  }
+
   onHandleOpen = () => {
     if (this.state.inputOne===' '||
       this.state.inputTwo===' '||
@@ -51,7 +65,8 @@ class TaskScreen extends Component {
       this.state.inputSix===' ') {
         this.setState({showErr: true});
     }else{
-        this.setState({modalOpen: true});
+      this.show('blurring');
+      this.setState({modalOpen: true});
     }
   }
 
@@ -85,43 +100,55 @@ class TaskScreen extends Component {
 
   render() {
 
-    const modalContent = "In this first section, you will be provided 4 minutes to list alternative uses for the prompt. Please note that vulgar answers can result in your expulsion from the study. You need to enter input to continue";
+    const modalContent = "In this next section, we will show you what others in your network came up with! You will be able to edit your own list if you get any new ideas! But remember only UNIQUE ideas count - if you just copy from others, we'll know :p" ;
 
+    const modalTimeContent = "This is a time section";
+    const {dimmer} = this.state;
+
+    let isNetworkActive = this.props.showNetwork;
     let isErr = this.state.showErr;
-
+    let width = 12;
     let modalStyles = {
       paddingRight: "2em"
     };
 
+    let segmentStyles = {
+      paddingBottom: "7em"
+    };
+
+    if (isNetworkActive) {
+      width = 6;
+    }
+
     if (isErr) {
       return (
       <div>
-        <div className="ui vertical segment">
+        <div className="ui vertical segment" style={segmentStyles}>
           <Container text>
             <Form error>
               <Form.Field>
                 <label>First Use</label>
-                <Form.Input onChange={this.onHandleOneChange} placeholder='Enter Input'/>
+                <Form.Input width={width} onChange={this.onHandleOneChange} placeholder='Enter Input'/>
               </Form.Field>
               <Form.Field>
                 <label>Second Use</label>
-                <Form.Input onChange={this.onHandleTwoChange} placeholder='Enter Input'/>
+                <Form.Input width={width} onChange={this.onHandleTwoChange} placeholder='Enter Input'/>
               </Form.Field>
               <Form.Field>
                 <label>Third Use</label>
-                <Form.Input onChange={this.onHandleThreeChange} placeholder='Enter Input'/>
+                <Form.Input width={width} onChange={this.onHandleThreeChange} placeholder='Enter Input'/>
               </Form.Field>
               <Form.Field>
                 <label>Fourth Use</label>
-                <Form.Input onChange={this.onHandleFourChange} placeholder='Enter Input'/>
+                <Form.Input width={width} onChange={this.onHandleFourChange} placeholder='Enter Input'/>
               </Form.Field>
               <Form.Field>
                 <label>Fifth Use</label>
-                <Form.Input onChange={this.onHandleFiveChange} placeholder='Enter Input'/>
+                <Form.Input width={width} onChange={this.onHandleFiveChange} placeholder='Enter Input'/>
               </Form.Field>
               <Form.Field>
                 <label>Sixth Use </label>
-                <Form.Input onChange={this.onHandleSixChange} placeholder='Enter Input'/>
+                <Form.Input width={width} onChange={this.onHandleSixChange} placeholder='Enter Input'/>
               </Form.Field>
               <Message
                 error
@@ -129,26 +156,41 @@ class TaskScreen extends Component {
                 content='Please fill in the boxes!'
               />
               <Container textAlign='right' style={modalStyles}>
-                <Modal trigger={<Button color = 'teal' onClick = {
-                    this.onHandleOpen
-                  } > Begin </Button>} open={this.state.modalOpen} onClose={this.onHandleClose} basic size='small'>
+                <Modal
+                  dimmer={dimmer}
+                  trigger={
+                    <Button
+                      color='teal'
+                      onClick={this.onHandleOpen}>
+                        Next
+                    </Button>}
+                  open={this.state.modalOpen} onClose={this.onHandleClose}
+                  basic
+                  size='small'>
 
-                  <Header icon='browser' content='Ready?'/>
+                  <Header
+                    size='medium'
+                    icon='browser'
+                    content='Ready?'/>
 
                   <Modal.Content>
                     <div>
                       {modalContent}
                     </div>
 
-                    <div>
-                      This is a timed section
-                    </div>
+                    <header
+                      size='small'
+                      color='red'
+                      content={modalTimeContent}/>
                   </Modal.Content>
 
                   <Modal.Actions>
-                    <Button color='green' onClick={this.onHandleClose} inverted="inverted">
-                      <Icon name='checkmark'/>
-                      Next
+                    <Button
+                      color='green'
+                      onClick={this.onHandleNetworkTask} inverted="inverted">
+                      <Icon
+                        name='checkmark'/>
+                      Continue
                     </Button>
                   </Modal.Actions>
                 </Modal>
@@ -161,53 +203,54 @@ class TaskScreen extends Component {
     }else{
       return (
       <div>
-        <div className="ui vertical segment">
+        <div className="ui vertical segment" style={segmentStyles}>
           <Container text>
             <Form>
               <Form.Field>
                 <label>First Use</label>
-                <Form.Input onChange={this.onHandleOneChange} placeholder='Enter Input'/>
+                <Form.Input width={width} onChange={this.onHandleOneChange} placeholder='Enter Input'/>
               </Form.Field>
               <Form.Field>
                 <label>Second Use</label>
-                <Form.Input onChange={this.onHandleTwoChange} placeholder='Enter Input'/>
+                <Form.Input width={width} onChange={this.onHandleTwoChange} placeholder='Enter Input'/>
               </Form.Field>
               <Form.Field>
                 <label>Third Use</label>
-                <Form.Input onChange={this.onHandleThreeChange} placeholder='Enter Input'/>
+                <Form.Input width={width} onChange={this.onHandleThreeChange} placeholder='Enter Input'/>
               </Form.Field>
               <Form.Field>
                 <label>Fourth Use</label>
-                <Form.Input onChange={this.onHandleFourChange} placeholder='Enter Input'/>
+                <Form.Input width={width} onChange={this.onHandleFourChange} placeholder='Enter Input'/>
               </Form.Field>
               <Form.Field>
                 <label>Fifth Use</label>
-                <Form.Input onChange={this.onHandleFiveChange} placeholder='Enter Input'/>
+                <Form.Input width={width} onChange={this.onHandleFiveChange} placeholder='Enter Input'/>
               </Form.Field>
               <Form.Field>
                 <label>Sixth Use </label>
-                <Form.Input onChange={this.onHandleSixChange} placeholder='Enter Input'/>
+                <Form.Input width={width} onChange={this.onHandleSixChange} placeholder='Enter Input'/>
               </Form.Field>
 
-              <Container textAlign='right' style={modalStyles}>
+              <Container style={modalStyles}>
                 <Modal trigger={<Button color = 'teal' onClick = {
                     this.onHandleOpen
                   } > Begin </Button>} open={this.state.modalOpen} onClose={this.onHandleClose} basic size='small'>
 
-                  <Header icon='browser' content='Ready?'/>
+                  <Header icon='browser' size='huge' content='Ready?'/>
 
                   <Modal.Content>
                     <div>
                       {modalContent}
                     </div>
 
-                    <div>
-                      This is a timed section
-                    </div>
+                    <Header
+                      size='small'
+                      color='red'
+                      content={modalTimeContent}/>
                   </Modal.Content>
 
                   <Modal.Actions>
-                    <Button color='green' onClick={this.onHandleClose} inverted>
+                    <Button color='green' onClick={this.onHandleNetworkTask} inverted>
                       <Icon name='checkmark'/>
                       Next
                     </Button>
@@ -223,4 +266,12 @@ class TaskScreen extends Component {
   }
 }
 
-export default TaskScreen;
+function mapStateToProps(state): Object {
+  return {
+    showTask: state.showTask,
+    showNetwork: state.showNetwork,
+    showUsers: state.showUsers
+  }
+}
+
+export default connect(mapStateToProps)(TaskScreen);

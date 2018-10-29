@@ -5,7 +5,12 @@ import {Button, Header, Modal, Container, Icon} from 'semantic-ui-react';
 
 import WelcomeScreen from '../components/WelcomeScreen';
 import TaskScreen from '../components/TaskScreen';
-import TimerScreen from '../components/TimerScreen';
+import TaskTimerScreen from '../components/TaskTimerScreen';
+import NetworkTimerScreen from '../components/NetworkTimerScreen';
+import AllUsersScreen from '../components/AllUsersScreen';
+import BlankTimerScreen from '../components/BlankTimerScreen';
+import UsersScreen from '../components/UsersScreen';
+import NetworkPanel from './NetworkPanel';
 
 class RightHandPanel extends Component {
 
@@ -29,6 +34,8 @@ class RightHandPanel extends Component {
   render() {
 
     let isTaskActive = this.props.showTask;
+    let isNetworkActive = this.props.showNetwork;
+    let isUsersActive = this.props.showUsers;
     console.log(this.props);
 
     let mainSegmentStyles = {
@@ -45,19 +52,34 @@ class RightHandPanel extends Component {
       marginTop: "0rem"
     };
 
-    if (!isTaskActive) {
+    if (!isTaskActive && !isNetworkActive && !isUsersActive) {
       return (
       <div>
-        <TimerScreen/>
-        <WelcomeScreen />
+        <BlankTimerScreen/>
+        <WelcomeScreen/>
       </div>
       );
 
-    }else{
+    }else if (isTaskActive && !isNetworkActive && !isUsersActive){
       return (
         <div>
-          <TimerScreen/>
+          <TaskTimerScreen/>
           <TaskScreen/>
+        </div>
+      );
+
+    }else if (!isTaskActive && isNetworkActive && !isUsersActive){
+      return (
+        <div>
+          <NetworkTimerScreen/>
+          <NetworkPanel/>
+        </div>
+      );
+    }else if (!isTaskActive && !isNetworkActive && isUsersActive){
+      return (
+        <div>
+          <AllUsersScreen/>
+          <UsersScreen/>
         </div>
       );
     }
@@ -66,7 +88,9 @@ class RightHandPanel extends Component {
 
 function mapStateToProps(state): Object {
   return {
-    showTask: state.showTask
+    showTask: state.showTask,
+    showNetwork: state.showNetwork,
+    showUsers: state.showUsers
   }
 }
 
