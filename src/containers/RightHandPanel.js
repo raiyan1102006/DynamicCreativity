@@ -1,13 +1,19 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 
+import {
+  BrowserRouter as Router,
+  Route,
+  Link
+} from 'react-router-dom'
+
 import {Button, Header, Modal, Container, Icon} from 'semantic-ui-react';
 
 import WelcomeScreen from '../components/WelcomeScreen';
 import TaskScreen from '../components/TaskScreen';
 import TaskTimerScreen from '../components/TaskTimerScreen';
 import NetworkTimerScreen from '../components/NetworkTimerScreen';
-import AllUsersScreen from '../components/AllUsersScreen';
+import UsersTimerScreen from '../components/UsersTimerScreen';
 import BlankTimerScreen from '../components/BlankTimerScreen';
 import UsersScreen from '../components/UsersScreen';
 import NetworkPanel from './NetworkPanel';
@@ -57,6 +63,7 @@ class RightHandPanel extends Component {
       <div>
         <BlankTimerScreen/>
         <WelcomeScreen/>
+
       </div>
       );
 
@@ -65,6 +72,7 @@ class RightHandPanel extends Component {
         <div>
           <TaskTimerScreen/>
           <TaskScreen/>
+
         </div>
       );
 
@@ -73,12 +81,13 @@ class RightHandPanel extends Component {
         <div>
           <NetworkTimerScreen/>
           <NetworkPanel/>
+
         </div>
       );
     }else if (!isTaskActive && !isNetworkActive && isUsersActive){
       return (
         <div>
-          <AllUsersScreen/>
+          <UsersTimerScreen/>
           <UsersScreen/>
         </div>
       );

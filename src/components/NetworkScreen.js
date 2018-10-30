@@ -17,16 +17,18 @@ class NetworkScreen extends Component {
 
   render() {
 
-    let teal = {
-      backgroundColor: '#008080'
+    let cardGroupStyles = {
+      paddingTop: "1.5em"
     };
 
     return (
-      <div>
-        <Card>
-          <Card.Content className='teal'>
-            <Card.Header textAlign='center'>Someone</Card.Header>
-          </Card.Content>
+      <Card.Group style={cardGroupStyles}>
+        <Card fluid color='teal'>
+          <Button disabled color='teal'>
+            <Card.Content className='teal'>
+              <Card.Header textAlign='center'>Someone</Card.Header>
+            </Card.Content>
+          </Button>
 
           <Card.Content textAlign='center'>
             <List>
@@ -37,10 +39,13 @@ class NetworkScreen extends Component {
           </Card.Content>
         </Card>
 
-        <Card>
-          <Card.Content>
-            <Card.Header textAlign='center'>Someone</Card.Header>
-          </Card.Content>
+        <Card fluid color='teal'>
+          <Button disabled color='teal'>
+            <Card.Content className='teal'>
+              <Card.Header textAlign='center'>Someone</Card.Header>
+            </Card.Content>
+          </Button>
+
           <Card.Content textAlign='center'>
             <List>
               <List.Item>List item </List.Item>
@@ -50,10 +55,13 @@ class NetworkScreen extends Component {
           </Card.Content>
         </Card>
 
-        <Card>
-          <Card.Content>
-            <Card.Header textAlign='center'>Someone</Card.Header>
-          </Card.Content>
+        <Card fluid color='teal'>
+          <Button disabled color='teal'>
+            <Card.Content className='teal'>
+              <Card.Header textAlign='center'>Someone</Card.Header>
+            </Card.Content>
+          </Button>
+
           <Card.Content textAlign='center'>
             <List>
               <List.Item>List item </List.Item>
@@ -63,10 +71,9 @@ class NetworkScreen extends Component {
           </Card.Content>
         </Card>
 
-      </div>
+      </Card.Group>
     );
   }
-
 }
 
 export default NetworkScreen;

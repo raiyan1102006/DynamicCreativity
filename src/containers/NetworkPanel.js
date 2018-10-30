@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 
-import {Button, Header, Modal, Container, Icon} from 'semantic-ui-react';
+import {Button, Header, Modal, Container, Segment, Icon, Grid } from 'semantic-ui-react';
 
 import NetworkScreen from '../components/NetworkScreen';
 import TaskScreen from '../components/TaskScreen';
@@ -10,21 +10,22 @@ class NetworkPanel extends Component {
 
   render() {
     return (
-      <div className="ui vertical segment" >
+      <Segment vertical>
+        <Grid
+          container
+          stackable
+          columns='equal' >
 
-        <div className="ui stackable grid" >
+        <Grid.Column>
+          <NetworkScreen/>
+        </Grid.Column>
 
-          <div className="eight wide  column">
-            <NetworkScreen/>
-          </div>
+        <Grid.Column>
+          <TaskScreen/>
+        </Grid.Column>
 
-          <div className="eight wide column">
-            <TaskScreen/>
-          </div>
-
-        </div>
-
-      </div>
+        </Grid>
+      </Segment>
     );
   }
 

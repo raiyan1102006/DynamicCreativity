@@ -2,6 +2,15 @@
 Creativity in Dynamic Networks
 
 ***
+# Notes
+
+## Things to add/ fix
+
+- add button for adding new tasks
+- Implement backend database
+- Fix, step navigation
+
+***
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

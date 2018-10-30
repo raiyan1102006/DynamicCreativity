@@ -9,7 +9,8 @@ import {
   Container,
   Icon,
   Form,
-  Message
+  Message,
+  Segment
 } from 'semantic-ui-react';
 
 class TaskScreen extends Component {
@@ -103,6 +104,10 @@ class TaskScreen extends Component {
     const modalContent = "In this next section, we will show you what others in your network came up with! You will be able to edit your own list if you get any new ideas! But remember only UNIQUE ideas count - if you just copy from others, we'll know :p" ;
 
     const modalTimeContent = "This is a time section";
+
+    const networkScreenLink = "/networkScreen";
+    const usersScreenLink = "/usersScreen";
+
     const {dimmer} = this.state;
 
     let isNetworkActive = this.props.showNetwork;
@@ -116,152 +121,151 @@ class TaskScreen extends Component {
       paddingBottom: "7em"
     };
 
+    let paddingRight = {
+      paddingRight: '0'
+    };
+
     if (isNetworkActive) {
-      width = 6;
+      paddingRight = {
+        paddingRight: '30em'
+      };
+      console.log(paddingRight);
     }
 
     if (isErr) {
       return (
-      <div>
-        <div className="ui vertical segment" style={segmentStyles}>
-          <Container text>
-            <Form error>
-              <Form.Field>
-                <label>First Use</label>
-                <Form.Input width={width} onChange={this.onHandleOneChange} placeholder='Enter Input'/>
-              </Form.Field>
-              <Form.Field>
-                <label>Second Use</label>
-                <Form.Input width={width} onChange={this.onHandleTwoChange} placeholder='Enter Input'/>
-              </Form.Field>
-              <Form.Field>
-                <label>Third Use</label>
-                <Form.Input width={width} onChange={this.onHandleThreeChange} placeholder='Enter Input'/>
-              </Form.Field>
-              <Form.Field>
-                <label>Fourth Use</label>
-                <Form.Input width={width} onChange={this.onHandleFourChange} placeholder='Enter Input'/>
-              </Form.Field>
-              <Form.Field>
-                <label>Fifth Use</label>
-                <Form.Input width={width} onChange={this.onHandleFiveChange} placeholder='Enter Input'/>
-              </Form.Field>
-              <Form.Field>
-                <label>Sixth Use </label>
-                <Form.Input width={width} onChange={this.onHandleSixChange} placeholder='Enter Input'/>
-              </Form.Field>
-              <Message
-                error
-                header='Action Forbidden'
-                content='Please fill in the boxes!'
-              />
-              <Container textAlign='right' style={modalStyles}>
-                <Modal
-                  dimmer={dimmer}
-                  trigger={
-                    <Button
-                      color='teal'
-                      onClick={this.onHandleOpen}>
-                        Next
-                    </Button>}
-                  open={this.state.modalOpen} onClose={this.onHandleClose}
-                  basic
-                  size='small'>
+        <Segment vertical style={segmentStyles}>
+          <Form error>
+            <Form.Field>
+              <label>First Use</label>
+              <Form.Input  onChange={this.onHandleOneChange} placeholder='Enter Input'/>
+            </Form.Field>
+            <Form.Field>
+              <label>Second Use</label>
+              <Form.Input  onChange={this.onHandleTwoChange} placeholder='Enter Input'/>
+            </Form.Field>
+            <Form.Field>
+              <label>Third Use</label>
+              <Form.Input  onChange={this.onHandleThreeChange} placeholder='Enter Input'/>
+            </Form.Field>
+            <Form.Field>
+              <label>Fourth Use</label>
+              <Form.Input  onChange={this.onHandleFourChange} placeholder='Enter Input'/>
+            </Form.Field>
+            <Form.Field>
+              <label>Fifth Use</label>
+              <Form.Input  onChange={this.onHandleFiveChange} placeholder='Enter Input'/>
+            </Form.Field>
+            <Form.Field>
+              <label>Sixth Use </label>
+              <Form.Input  onChange={this.onHandleSixChange} placeholder='Enter Input'/>
+            </Form.Field>
+            <Message
+              error
+              header='Action Forbidden'
+              content='Please fill in the boxes!'
+            />
+            <Container textAlign='right' style={modalStyles}>
+              <Modal
+                dimmer={dimmer}
+                trigger={
+                  <Button
+                    color='teal'
+                    onClick={this.onHandleOpen}>
+                      Next
+                  </Button>}
+                open={this.state.modalOpen} onClose={this.onHandleClose}
+                basic
+                size='small'>
 
-                  <Header
-                    size='medium'
-                    icon='browser'
-                    content='Ready?'/>
+                <Header
+                  size='medium'
+                  icon='browser'
+                  content='Ready?'/>
 
-                  <Modal.Content>
-                    <div>
-                      {modalContent}
-                    </div>
+                <Modal.Content>
+                  <div>
+                    {modalContent}
+                  </div>
 
-                    <header
-                      size='small'
-                      color='red'
-                      content={modalTimeContent}/>
-                  </Modal.Content>
+                  <header
+                    size='small'
+                    color='red'
+                    content={modalTimeContent}/>
+                </Modal.Content>
 
-                  <Modal.Actions>
-                    <Button
-                      color='green'
-                      onClick={this.onHandleNetworkTask} inverted="inverted">
-                      <Icon
-                        name='checkmark'/>
-                      Continue
-                    </Button>
-                  </Modal.Actions>
-                </Modal>
-              </Container>
-
-            </Form>
-          </Container>
-        </div>
-      </div>);
+                <Modal.Actions>
+                  <Button
+                    color='green'
+                    onClick={this.onHandleNetworkTask} inverted="inverted">
+                    <Icon
+                      name='checkmark'/>
+                    <Link to={{isNetworkActive} ? {networkScreenLink} : {usersScreenLink} }>Next</Link>
+                  </Button>
+                </Modal.Actions>
+              </Modal>
+            </Container>
+          </Form>
+        </Segment>
+      );
     }else{
       return (
-      <div>
-        <div className="ui vertical segment" style={segmentStyles}>
-          <Container text>
-            <Form>
-              <Form.Field>
-                <label>First Use</label>
-                <Form.Input width={width} onChange={this.onHandleOneChange} placeholder='Enter Input'/>
-              </Form.Field>
-              <Form.Field>
-                <label>Second Use</label>
-                <Form.Input width={width} onChange={this.onHandleTwoChange} placeholder='Enter Input'/>
-              </Form.Field>
-              <Form.Field>
-                <label>Third Use</label>
-                <Form.Input width={width} onChange={this.onHandleThreeChange} placeholder='Enter Input'/>
-              </Form.Field>
-              <Form.Field>
-                <label>Fourth Use</label>
-                <Form.Input width={width} onChange={this.onHandleFourChange} placeholder='Enter Input'/>
-              </Form.Field>
-              <Form.Field>
-                <label>Fifth Use</label>
-                <Form.Input width={width} onChange={this.onHandleFiveChange} placeholder='Enter Input'/>
-              </Form.Field>
-              <Form.Field>
-                <label>Sixth Use </label>
-                <Form.Input width={width} onChange={this.onHandleSixChange} placeholder='Enter Input'/>
-              </Form.Field>
+        <Segment vertical style={segmentStyles}>
+          <Form >
+            <Form.Field>
+              <label>First Use</label>
+              <Form.Input  onChange={this.onHandleOneChange} placeholder='Enter Input'/>
+            </Form.Field>
+            <Form.Field>
+              <label>Second Use</label>
+              <Form.Input  onChange={this.onHandleTwoChange} placeholder='Enter Input'/>
+            </Form.Field>
+            <Form.Field>
+              <label>Third Use</label>
+              <Form.Input  onChange={this.onHandleThreeChange} placeholder='Enter Input'/>
+            </Form.Field>
+            <Form.Field>
+              <label>Fourth Use</label>
+              <Form.Input  onChange={this.onHandleFourChange} placeholder='Enter Input'/>
+            </Form.Field>
+            <Form.Field>
+              <label>Fifth Use</label>
+              <Form.Input  onChange={this.onHandleFiveChange} placeholder='Enter Input'/>
+            </Form.Field>
+            <Form.Field>
+              <label>Sixth Use </label>
+              <Form.Input  onChange={this.onHandleSixChange} placeholder='Enter Input'/>
+            </Form.Field>
 
-              <Container style={modalStyles}>
-                <Modal trigger={<Button color = 'teal' onClick = {
-                    this.onHandleOpen
-                  } > Begin </Button>} open={this.state.modalOpen} onClose={this.onHandleClose} basic size='small'>
+            <Container textAlign='right' style={modalStyles}>
+              <Modal trigger={<Button color = 'teal' onClick = {
+                  this.onHandleOpen
+                } > Begin </Button>} open={this.state.modalOpen} onClose={this.onHandleClose} basic size='small'>
 
-                  <Header icon='browser' size='huge' content='Ready?'/>
+                <Header icon='browser' size='huge' content='Ready?'/>
 
-                  <Modal.Content>
-                    <div>
-                      {modalContent}
-                    </div>
+                <Modal.Content>
+                  <div>
+                    {modalContent}
+                  </div>
 
-                    <Header
-                      size='small'
-                      color='red'
-                      content={modalTimeContent}/>
-                  </Modal.Content>
+                  <Header
+                    size='small'
+                    color='red'
+                    content={modalTimeContent}/>
+                </Modal.Content>
 
-                  <Modal.Actions>
-                    <Button color='green' onClick={this.onHandleNetworkTask} inverted>
-                      <Icon name='checkmark'/>
-                      Next
-                    </Button>
-                  </Modal.Actions>
-                </Modal>
-              </Container>
-
-            </Form>
-          </Container>
-        </div>
-      </div>);
+                <Modal.Actions>
+                  <Button color='green' onClick={this.onHandleNetworkTask} inverted>
+                    <Icon name='checkmark'/>
+                    <Link to={{isNetworkActive} ? {networkScreenLink} : {usersScreenLink} }>Next</Link>
+                  </Button>
+                </Modal.Actions>
+              </Modal>
+            </Container>
+          </Form>
+        </Segment>
+      );
     }
   }
 }

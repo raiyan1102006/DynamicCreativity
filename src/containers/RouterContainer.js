@@ -1,6 +1,6 @@
 // React
 import React, {Component} from "react";
-import {Router, Route} from "react-router-dom";
+import {Router, Route, Switch} from "react-router-dom";
 
 // Redux
 import {connect} from "react-redux";
@@ -12,8 +12,13 @@ import history from "../utils/history";
 // Actions
 //import * as AppActions from "../actions/Actions";
 
-// Components
+// Components && Containers
 import HomePage from "../containers/HomePage";
+import NetworkPanel from "../containers/NetworkPanel";
+
+import UsersScreen from "../components/UsersScreen";
+import TaskScreen from "../components/TaskScreen";
+import StepNavigation from "../components/StepNavigation";
 
 export class AppRouter extends Component {
   _element = React.createElement;
@@ -28,13 +33,10 @@ export class AppRouter extends Component {
       <Router history={history}>
         <div>
           <Route
-            path="/"
+            exact={true} path="/"
             component={HomePage}/>
           <Route
-            path="/task"
-            component={HomePage}/>
-          <Route
-            path="/network"
+            exact={true} path="/secondTask"
             component={HomePage}/>
         </div>
       </Router>

@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 
-import {Button, Header, Modal, Container, Icon} from 'semantic-ui-react';
+import {Button, Header, Modal, Container, Icon, Segment, Grid} from 'semantic-ui-react';
 
 import RightHandPanel from './RightHandPanel';
 import LeftHandPanel from './LeftHandPanel';
+import StepNavigation from '../components/StepNavigation';
 
 class HomePage extends Component {
 
@@ -48,19 +49,21 @@ class HomePage extends Component {
 
     if (!isTaskActive) {
       return (
-        <div className="ui vertical segment" style={mainSegmentStyles}>
+        <div>
 
-          <div className="ui stackable grid" style={mainSegmentStyles}>
+          <Segment attached vertical style={mainSegmentStyles}>
+            <Grid stackable style={mainSegmentStyles}>
+              <Grid.Column width={4} color='teal'>
+                <LeftHandPanel/>
+              </Grid.Column>
 
-            <div className="four wide teal column">
-              <LeftHandPanel/>
-            </div>
+              <Grid.Column width={11}>
+                {<RightHandPanel/>}
+              </Grid.Column>
+            </Grid>
+          </Segment>
 
-            <div className="twelve wide column">
-              <RightHandPanel/>
-            </div>
-
-          </div>
+          <StepNavigation/>
 
         </div>
       );

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 
-import {Button, Header, Modal, Container, Icon} from 'semantic-ui-react';
+import {Button, Header, Modal, Container, Icon, Segment} from 'semantic-ui-react';
 
 class BlankTimerScreen extends Component {
 
@@ -53,11 +53,11 @@ class BlankTimerScreen extends Component {
 
 
     return (
-      <div className="ui vertical segment">
+      <Segment vertical>
         <Container textAlign='center' style={timeSegmentStyles}>
           <Header style={timeStyles}></Header>
         </Container>
-      </div>
+      </Segment>
     );
   }
 }
