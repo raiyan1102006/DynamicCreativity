@@ -119,29 +119,7 @@ class TaskTimerScreen extends Component {
       <div className="ui vertical segment">
         <Container textAlign='center' style={timeSegmentStyles}>
           <Header style={timeStyles}>{this.onGetMinutes()}:{this.onGetSeconds()}</Header>
-          <Modal
-            open={this.onHandleOpen} onClose={this.onHandleClose} basic size='small'>
 
-            <Header icon='browser' size='huge' content='Ready?'/>
-
-            <Modal.Content>
-              <div>
-                {modalContent}
-              </div>
-
-              <Header
-                size='small'
-                color='red'
-                content={modalTimeContent}/>
-            </Modal.Content>
-
-            <Modal.Actions>
-              <Button color='green' onClick={this.onHandleNetworkTask} inverted>
-                <Icon name='checkmark'/>
-                Next
-              </Button>
-            </Modal.Actions>
-          </Modal>
         </Container>
       </div>
     );
