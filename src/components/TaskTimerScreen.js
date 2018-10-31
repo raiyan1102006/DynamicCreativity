@@ -11,6 +11,8 @@ class TaskTimerScreen extends Component {
     super(props);
     // Bind all methods to 'this' context here
     (this: any).onHandleStartTimer = this.onHandleStartTimer.bind(this);
+    (this: any).onHandleOpen = this.onHandleOpen.bind(this);
+    (this: any).onHandleClose = this.onHandleClose.bind(this);
     (this: any).onGetSeconds = this.onGetSeconds.bind(this);
     (this: any).onGetMinutes = this.onGetMinutes.bind(this);
   }
@@ -56,7 +58,31 @@ class TaskTimerScreen extends Component {
     }
   }
 
+  onHandleOpen = () => {
+    if (this.state.inputOne===' '||
+      this.state.inputTwo===' '||
+      this.state.inputThree===' '||
+      this.state.inputFour==='' ||
+      this.state.inputFive===' '||
+      this.state.inputSix===' ') {
+        this.setState({showErr: true});
+    }else{
+      this.show('blurring');
+      this.setState({modalOpen: true});
+      return true;
+    }
+    return false;
+  }
+
+  onHandleClose = () => {
+    this.setState({modalOpen: false})
+  }
+
   render() {
+
+    const modalContent = "In this next section, we will show you what others in your network came up with! You will be able to edit your own list if you get any new ideas! But remember only UNIQUE ideas count - if you just copy from others, we'll know :p" ;
+
+    const modalTimeContent = "This is a time section";
 
     let isTimerActive = this.props.showTask;
 
@@ -93,6 +119,29 @@ class TaskTimerScreen extends Component {
       <div className="ui vertical segment">
         <Container textAlign='center' style={timeSegmentStyles}>
           <Header style={timeStyles}>{this.onGetMinutes()}:{this.onGetSeconds()}</Header>
+          <Modal
+            open={this.onHandleOpen} onClose={this.onHandleClose} basic size='small'>
+
+            <Header icon='browser' size='huge' content='Ready?'/>
+
+            <Modal.Content>
+              <div>
+                {modalContent}
+              </div>
+
+              <Header
+                size='small'
+                color='red'
+                content={modalTimeContent}/>
+            </Modal.Content>
+
+            <Modal.Actions>
+              <Button color='green' onClick={this.onHandleNetworkTask} inverted>
+                <Icon name='checkmark'/>
+                Next
+              </Button>
+            </Modal.Actions>
+          </Modal>
         </Container>
       </div>
     );

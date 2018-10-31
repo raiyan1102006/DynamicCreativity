@@ -48,7 +48,7 @@ class WelcomeScreen extends Component {
     const intro = "Thank you for particpating in the Creativity Project!";
     const modalContent = "In this first section, you will be provided 4 minutes to list alternative uses for the prompt. Please note that vulgar answers can result in your expulsion from the study. You need to enter input to continue";
     const instructions = "This study consists of 5 Tasks";
-    const tasks = "Each task will have three scetions";
+    const tasks = "Each task will have three scetions:";
     const taskOne = "You will be asked to come up with alternate uses of the given object";
     const taskTwo = "After you submit your list, we will show what others in your network submitted and you will get to edit your answers";
     const taskThree = "Then you will be able to view all members of your network and change who you follow, before the next task starts";
@@ -112,7 +112,6 @@ class WelcomeScreen extends Component {
                 </Button>}
               open={this.state.modalOpen}
               onClose={this.onHandleClose}
-              basic
               size='small'>
 
               <Header icon='browser' content='Ready?'/>
